@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>RéviAI - Révise intelligemment</title>
+
+<style>
+
+body{margin:0;font-family:Arial,sans-serif;background:#f4f5ff;color:#202447}
+
+header{background:#5546dc;color:white;padding:24px;text-align:center}
+
+main{max-width:850px;margin:auto;padding:20px}
+
+select,input,button{padding:12px;border-radius:10px;border:1px solid #ddd;margin:5px;max-width:100%}
+
+button{background:#5546dc;color:white;border:0;cursor:pointer}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+
+.card{background:white;padding:20px;border-radius:14px;cursor:pointer;box-shadow:0 2px 8px #ddd}
+
+#lesson{background:white;padding:18px;border-radius:12px;margin-top:15px}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 RéviAI</h1>
+
+<p>Révise de la Seconde au BTS gratuitement</p>
+
+</header>
+
+<main>
+
+<h2>Choisis ton niveau</h2>
+
+<select id="niveau">
+
+<option>Seconde</option><option>Première</option>
+
+<option>Terminale</option><option>CAP</option>
+
+<option>Bac professionnel</option><option>BTS</option>
+
+</select>
+
+<h2>📖 Toutes tes matières</h2>
+
+<div class="cards" id="matieres"></div>
+
+<div id="lesson">
+
+<h3>Bienvenue sur RéviAI !</h3>
+
+<p>Choisis une matière pour découvrir sa fiche de révision.</p>
+
+</div>
+
+<h2>🧠 Mini quiz</h2>
+
+<p>Combien font 7 × 8 ?</p>
+
+<button onclick="reponse(56)">56</button>
+
+<button onclick="reponse(54)">54</button>
+
+<p id="resultat"></p>
+
+<h2>🤖 Poser une question à l'IA</h2>
+
+<input id="question" placeholder="Ex : Explique-moi les fractions">
+
+<button onclick="demander()">Envoyer</button>
+
+<p id="ia">Le chat IA sera activé après connexion à un service d'IA.</p>
+
+</main>
+
+<script>
+
+const cours={
+
+"Mathématiques":"Révise les calculs, les équations, les fonctions et la géométrie.",
+
+"Français":"Travaille la grammaire, l'orthographe, les textes et l'argumentation.",
+
+"Histoire-géo":"Révise les dates, les événements et les grands enjeux géographiques.",
+
+"Anglais":"Entraîne-toi au vocabulaire, à la grammaire et à la compréhension.",
+
+"Physique-chimie":"Découvre les grandeurs, les formules et les expériences.",
+
+"SVT":"Révise la biologie, le vivant et la planète.",
+
+"Informatique":"Découvre la programmation et les outils numériques.",
+
+"Économie-gestion":"Travaille l'économie, la gestion et les organisations.",
+
+"Philosophie":"Découvre les notions et la méthode de dissertation.",
+
+"Comptabilité":"Révise les opérations comptables et les documents de gestion.",
+
+"Culture générale":"Entraîne-toi à analyser des documents et à argumenter."
+
+};
+
+const zone=document.getElementById('matieres');
+
+Object.keys(cours).forEach(m=>{
+
+ const c=document.createElement('div');
+
+ c.className='card';
+
+ c.textContent=m;
+
+ c.onclick=()=>{
+
+  document.getElementById('lesson').innerHTML=
+
+   '<h3>'+m+'</h3><p>'+cours[m]+'</p>';
+
+ };
+
+ zone.appendChild(c);
+
+});
+
+function reponse(n){
+
+ document.getElementById('resultat').textContent=
+
+ n===56?'Bravo ! Bonne réponse 🎉':'Essaie encore !';
+
+}
+
+function demander(){
+
+ const q=document.getElementById('question').value.trim();
+
+ document.getElementById('ia').textContent=q
+
+ ?'Ta question : '+q+'. Le service IA doit encore être connecté pour répondre.'
+
+ :'Écris une question avant de l’envoyer.';
+
+}
+
+</script>
+
+</body>
+
+</html>
